@@ -20,15 +20,15 @@
     methods: {
       async submitData() {
         try {
-          const response = await fetch('https://your-api-endpoint.com/submit', {
+          const response = await fetch('http://localhost:3000/api/data-transfer', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ text: this.inputText }),
+            body: JSON.stringify(this.inputText)
           });
           const data = await response.json();
-          this.responseData = data;
+          this.responseData = data.message;
         } catch (error) {
           console.error('Error:', error);
         }
