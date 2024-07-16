@@ -4,7 +4,7 @@
       <button @click="submitData">Submit</button>
       <div v-if="responseData" class="response">
         <h3>Response from API:</h3>
-        <p>{{ responseData }}</p>
+        <pre>{{ formattedResponse }}</pre>
       </div>
     </div>
   </template>
@@ -17,6 +17,13 @@
         responseData: null,
       };
     },
+    computed: {
+      formattedResponse() {
+        return typeof this.responseData === 'object'
+          ? JSON.stringify(this.responseData, null, 2)
+          : this.responseData;
+      },
+    },
     methods: {
       async submitData() {
         try {
@@ -25,7 +32,7 @@
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(this.inputText)
+            body: JSON.stringify(this.inputText),
           });
           const data = await response.json();
           this.responseData = data.message;
@@ -60,6 +67,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     resize: none;
+    font-size: 14px;
   }
   
   button {
@@ -69,6 +77,7 @@
     background-color: #007bff;
     color: white;
     cursor: pointer;
+    font-size: 16px;
   }
   
   button:hover {
@@ -78,6 +87,22 @@
   .response {
     margin-top: 20px;
     text-align: center;
+    width: 100%;
+    overflow: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  pre {
+    text-align: left;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
   }
   </style>
   
