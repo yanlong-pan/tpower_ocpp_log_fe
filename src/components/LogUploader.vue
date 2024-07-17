@@ -2,7 +2,7 @@
     <div class="container">
       <textarea v-model="inputText" placeholder="Enter your text here"></textarea>
       <button @click="submitData">Submit</button>
-      <div v-if="responseData" class="response">
+      <div v-if="responseData" :class="['response', responseClass]">
         <h3>Response from API:</h3>
         <pre>{{ formattedResponse }}</pre>
       </div>
@@ -15,6 +15,7 @@
       return {
         inputText: '',
         responseData: null,
+        responseSuccess: null,
       };
     },
     computed: {
@@ -23,11 +24,20 @@
           ? JSON.stringify(this.responseData, null, 2)
           : this.responseData;
       },
+      responseClass() {
+        if (this.responseSuccess === true) {
+          return 'success';
+        } else if (this.responseSuccess === false) {
+          return 'error';
+        } else {
+          return '';
+        }
+      },
     },
     methods: {
       async submitData() {
         try {
-          const response = await fetch('http://localhost:3000/api/data-transfer', {
+          const response = await fetch('http://localhost:3000/api/process-charger-sent-logs', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -36,6 +46,7 @@
           });
           const data = await response.json();
           this.responseData = data.message;
+          this.responseSuccess = data.success;
         } catch (error) {
           console.error('Error:', error);
         }
@@ -104,5 +115,12 @@
     white-space: pre-wrap;
     word-wrap: break-word;
   }
-  </style>
   
+  .success pre {
+    color: green;
+  }
+  
+  .error pre {
+    color: red;
+  }
+  </style>
