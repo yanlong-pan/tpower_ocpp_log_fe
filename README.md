@@ -1,4 +1,11 @@
+
+
 <!-- toc -->
+
+- [1. Project Introduction](#1-project-introduction)
+- [2. How to Run](#2-how-to-run)
+
+<!-- tocstop -->
 
 # 1. Project Introduction
 
@@ -37,8 +44,8 @@ This project provides a user-friendly interface where users can paste any single
 7. If port 8080 is in use, you can change it with: `npm run serve -- --port <your-port>`
 8. Copy and paste a single line of log record into the text area, then click the `Submit` button.
 9. Check beautified json outputs under `Response from API:`. Note:
-   - If the result is displayed in green, it means the processing was successful, and the returned value is the standardized input.
+   - If the result is displayed in green, it means the processing was successful, and the returned value is the standardized input.  
     ![image](https://github.com/user-attachments/assets/13959e05-09fd-4386-a53f-a8ffcecdfc9d)
 
-   - If the result is displayed in red, it indicates a processing failure. Please check the input format and content according to the error message.
+   - If the result is displayed in red, it indicates a processing failure. Please check the input format and content according to the error message.  
     ![image](https://github.com/user-attachments/assets/54ce500f-dc84-4367-b10b-09f53a2e051d)
